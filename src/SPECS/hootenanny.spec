@@ -1,5 +1,6 @@
+# Do not modify directly, please modify hootenanny.spec.in instead.
 Name:		hootenanny
-Version:	%%HOOT_VERSION%%
+Version:	0.2.20_287_gb6fc38b
 Release:	1%{?dist}
 Summary:	Hootenanny - we merge maps.
 
