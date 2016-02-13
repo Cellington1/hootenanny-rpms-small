@@ -1,5 +1,5 @@
 Name:		hootenanny
-Version:	%%HOOT_VERSION%%
+Version:	0.2.20_292_g35218bf
 Release:	1%{?dist}
 Summary:	Hootenanny - we merge maps.
 
@@ -121,7 +121,6 @@ Requires:       gdb
 Requires:       geos-devel = 3.4.2
 Requires:       git glpk-devel libicu-devel log4cxx-devel nodejs-devel opencv-devel
 Requires:       postgresql91-devel proj-devel protobuf-devel python-argparse python-devel qt-devel v8-devel
-Requires:	stxxl-devel
 # Needed to build the documentation
 Requires:       texlive
 
@@ -149,7 +148,6 @@ Requires:       geos = 3.4.2, gnuplot, graphviz
 # Needed by gnuplot for report generation
 Requires:       liberation-fonts-common liberation-sans-fonts
 Requires:       libxslt log4cxx nodejs opencv postgresql91-libs protobuf qt
-Requires:	stxxl
 Requires:       texlive
 Requires:       unzip w3m wget words
 Requires:       zip
@@ -168,8 +166,5 @@ This packages contains the dependencies to run the Hootenanny core.
 %files core-deps
 
 %changelog
-* Fri Jan 29 2016 Ben Marchant <benjamin.marchant@digitalglobe.com> - 0.2.21+
-- Adding stxxl and stxxl-devel
-
 * Thu Jan 21 2016 Jason R. Surratt <jason.surratt@digitalglobe.com> - 0.2.21+
 - Initial attempt
