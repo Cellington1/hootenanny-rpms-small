@@ -160,9 +160,7 @@ rm -rf %{buildroot}
 %{_sharedstatedir}/%{name}
 %{_sysconfdir}/profile.d/hootenanny.sh
 %{_sysconfdir}/asciidoc/filters/
-
-
-
+%{getenv:HOME}/.asciidoc/filters/
 
 %package services-ui
 Summary:    Hootenanny UI and Services
@@ -771,6 +769,9 @@ This packages contains the dependencies to run the Hootenanny core.
 %files core-deps
 
 %changelog
+* Tue Jul 11 2017 Ben Marchant <benjamin.marchant@digitalglobe.com> - 0.2.34+
+- Fix intermittent RPM failures
+
 * Fri May 12 2017 Matt Jackson <matthew.jacksondigitalglobe.com> - 0.2.33+
 - Fix libpq issues
 
