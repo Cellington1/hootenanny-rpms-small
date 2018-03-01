@@ -157,19 +157,19 @@ function build_base_images() {
            --build-arg rpmbuild_dist=$RPMBUILD_DIST \
            --build-arg rpmbuild_uid=$(id -u) \
            -f $SCRIPT_HOME/docker/Dockerfile.rpmbuild \
-           -i hootenanny/rpmbuild \
+            hootenanny/rpmbuild \
            $SCRIPT_HOME
 
     # Base image that has basic development and RPM building packages.
     docker build \
        -f $SCRIPT_HOME/docker/Dockerfile.rpmbuild-base \
-       -i hootenanny/rpmbuild-base \
+        hootenanny/rpmbuild-base \
        $SCRIPT_HOME
 
     # Generic image for building RPMS without any other prerequisites.
     docker build \
            -f $SCRIPT_HOME/docker/Dockerfile.rpmbuild-generic \
-           -i hootenanny/rpmbuild-generic \
+            hootenanny/rpmbuild-generic \
            $SCRIPT_HOME
 
     # Base image with PostgreSQL develop libraries from PGDG at the
@@ -177,7 +177,7 @@ function build_base_images() {
     docker build \
            --build-arg pg_version=$PG_VERSION \
            -f $SCRIPT_HOME/docker/Dockerfile.rpmbuild-pgdg \
-           -i hootenanny/rpmbuild-pgdg:$PG_VERSION \
+            hootenanny/rpmbuild-pgdg:$PG_VERSION \
            $SCRIPT_HOME
 }
 
@@ -185,7 +185,7 @@ function build_base_images() {
 function build_repo_images() {
     docker build \
            -f $SCRIPT_HOME/docker/Dockerfile.rpmbuild-repo \
-           -i hootenanny/rpmbuild-repo \
+            hootenanny/rpmbuild-repo \
            $SCRIPT_HOME
 }
 
@@ -193,7 +193,7 @@ function build_run_images() {
     docker build \
            --build-arg pg_version=$PG_VERSION \
            -f $SCRIPT_HOME/docker/Dockerfile.run-base \
-           -i hootenanny/run-base \
+            hootenanny/run-base \
            $SCRIPT_HOME
 }
 
