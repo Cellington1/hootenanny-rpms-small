@@ -228,9 +228,9 @@ function run_dep_image() {
     else
         mkdir -p $RPMS
         docker run \
-               -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
-               -v $SPECS:/rpmbuild/SPECS:ro \
-               -v $RPMS:/rpmbuild/RPMS:rw \
+               -v $SOURCES:/jslave/rpmbuild/SOURCES:$sources_mode \
+               -v $SPECS:/jslave/rpmbuild/SPECS:ro \
+               -v $RPMS:/jslave/rpmbuild/RPMS:rw \
                -u $user \
                -i --rm \
                $image "$@"
@@ -272,13 +272,13 @@ function run_hoot_build_image() {
     else
         mkdir -p $SCRIPT_HOME/hootenanny $CACHE/m2 $CACHE/npm
         docker run \
-               -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
-               -v $SPECS:/rpmbuild/SPECS:ro \
-               -v $RPMS:/rpmbuild/RPMS:rw \
-               -v $SCRIPT_HOME/hootenanny:/rpmbuild/hootenanny:rw \
-               -v $CACHE/m2:/rpmbuild/.m2:rw \
-               -v $CACHE/npm:/rpmbuild/.npm:rw \
-               -v $SCRIPT_HOME/scripts:/rpmbuild/scripts:ro \
+               -v $SOURCES:/jslave/rpmbuild/SOURCES:$sources_mode \
+               -v $SPECS:/jslave/rpmbuild/SPECS:ro \
+               -v $RPMS:/jslave/rpmbuild/RPMS:rw \
+               -v $SCRIPT_HOME/hootenanny:/jslave/rpmbuild/hootenanny:rw \
+               -v $CACHE/m2:/jslave/rpmbuild/.m2:rw \
+               -v $CACHE/npm:/jslave/rpmbuild/.npm:rw \
+               -v $SCRIPT_HOME/scripts:/jslave/rpmbuild/scripts:ro \
                --entrypoint $entrypoint \
                -u $user \
                -i --rm \
