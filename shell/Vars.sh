@@ -18,6 +18,13 @@ RPMS=$SCRIPT_HOME/RPMS
 CACHE=$SCRIPT_HOME/cache
 HOOT=$SCRIPT_HOME/hootenanny
 
+# Test function
+
+myfunction(){
+    echo "My function works!"
+}
+myfunction
+
 ## Utility functions.
 
 function latest_hoot_archive() {
