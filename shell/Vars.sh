@@ -1,3 +1,4 @@
+#!/bin/bash
 # The rpm apt package is required when on Ubuntu because we treat the
 # *.spec files as a source of truth for version information and
 # `rpm` and `rpmspec` are necessary to intrepret them from macros.
@@ -22,6 +23,8 @@ HOOT=$SCRIPT_HOME/hootenanny
 function latest_hoot_archive() {
     echo $(ls -1t $SOURCES/hootenanny-[0-9]*.tar.gz | head -n1)
 }
+
+latest_hoot_archive
 
 # Returns the output of Hootenanny's `HOOT_VERSION_GEN`, embedded
 # in the archive's filename.
