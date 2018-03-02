@@ -28,7 +28,7 @@ ENV RPMBUILD_USER=rpmbuild
 ENV RPMBUILD_HOME=/rpmbuild
 
 # Create unprivileged user for building RPMs, and setup basic macros.
-RUN useradd -d /jslave/rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
+RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
     echo "%_hardened_build 1" >> /jslave/rpmbuild/.rpmmacros && \
     echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /jslave/rpmbuild/.rpmmacros && \
     echo "%_topdir /jslave/rpmbuild" >> /jslave/rpmbuild/.rpmmacros && \
