@@ -29,7 +29,7 @@ ENV RPMBUILD_HOME=/rpmbuild
 
 # Create unprivileged user for building RPMs, and setup basic macros.
 #RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
-    echo "%_hardened_build 1" >> /rpmbuild/.rpmmacros && \
+RUN echo "%_hardened_build 1" >> /rpmbuild/.rpmmacros && \
     echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /rpmbuild/.rpmmacros && \
     echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
     echo "%debug_package %{nil}" >> /rpmbuild/.rpmmacros && \
