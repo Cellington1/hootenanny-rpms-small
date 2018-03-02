@@ -12,4 +12,4 @@ BUILD_IMAGE=${BUILD_IMAGE:-hootenanny/rpmbuild-hoot-release}
 
 run_hoot_build_image \
     -i $BUILD_IMAGE -s rw \
-    /bin/bash -c "/jslave/rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /jslave/rpmbuild/scripts/hoot-archive.sh"
+    /bin/bash -c "/rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /rpmbuild/scripts/hoot-archive.sh"
