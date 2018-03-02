@@ -28,11 +28,11 @@ ENV RPMBUILD_USER=rpmbuild
 ENV RPMBUILD_HOME=/rpmbuild
 
 # Create unprivileged user for building RPMs, and setup basic macros.
-RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
-    echo "%_hardened_build 1" >> /rpmbuild/.rpmmacros && \
-    echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /rpmbuild/.rpmmacros && \
-    echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
-    echo "%debug_package %{nil}" >> /rpmbuild/.rpmmacros && \
-    echo "%dist .el7" >> /rpmbuild/.rpmmacros && \
-    chmod 0755 /rpmbuild && \
-    chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
+RUN useradd -d /jslave/rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
+    echo "%_hardened_build 1" >> /jslave/rpmbuild/.rpmmacros && \
+    echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /jslave/rpmbuild/.rpmmacros && \
+    echo "%_topdir /jslave/rpmbuild" >> /jslave/rpmbuild/.rpmmacros && \
+    echo "%debug_package %{nil}" >> /jslave/rpmbuild/.rpmmacros && \
+    echo "%dist .el7" >> /jslave/rpmbuild/.rpmmacros && \
+    chmod 0755 /jslave/rpmbuild && \
+    chown rpmbuild:rpmbuild /jslave/rpmbuild/.rpmmacros
