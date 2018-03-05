@@ -1,0 +1,32 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = 'hoot/centos7-minimal'
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+
+  config.vm.provider :aws do |aws|
+    aws.block_device_mapping = [
+      {
+        'DeviceName' => '/dev/sda1',
+        'Ebs.VolumeSize' => 64,
+      }
+    ]
+
+    aws.instance_type = ENV.fetch('AWS_INSTANCE_TYPE', 'm3.2xlarge')
+
+    if ENV.key?('AWS_KEYPAIR_NAME')
+      aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
+    end
+
+    if ENV.key?('AWS_SECURITY_GROUP')
+      aws.security_groups = ENV['AWS_SECURITY_GROUP']
+    end
+
+    aws.tags = {
+      'Name' => ENV.fetch('AWS_INSTANCE_NAME_TAG', 'jenkins-hootenanny-rpms'),
+      'URL'  => ENV.fetch('AWS_INSTANCE_URL_TAG', 'https://github.com/ngageoint/hootenanny-rpms'),
+    }
+  end
+
+  config.vm.provision 'docker', type: 'shell', :privileged => false, :path => 'docker-install.sh'
+  config.vm.provision 'vagrant', type: 'shell', :privileged => false, :path => 'vagrant-install.sh'
+  config.vm.provision 'hootenanny-rpms', type: 'shell', :privileged => false, :path => 'hootenanny-rpms.sh'
+end
