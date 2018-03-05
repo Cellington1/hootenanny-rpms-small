@@ -35,6 +35,7 @@
 %{!?tomcat_basedir: %global tomcat_basedir %{_sharedstatedir}/tomcat8}
 %{!?tomcat_config: %global tomcat_config %{_sysconfdir}/tomcat8}
 %{!?tomcat_home: %global tomcat_home %{_datadir}/tomcat8}
+%{!?tomcat_logs: %global tomcat_logs %{_var}/log/tomcat8}
 %global tomcat_webapps %{tomcat_basedir}/webapps
 
 # NodeJS package includes an epoch that must be used for requirements.
@@ -203,6 +204,14 @@ export HOOT_HOME=%{hoot_home}
 export HOOT_WORKING_NAME=%{name}
 EOF
 
+# Add a dummy Tomcat log file, `catalina.out`, to prevent error popup in UI.
+%{__install} -d -m 0775 %{buildroot}%{tomcat_logs}
+%{__cat} >> %{buildroot}%{tomcat_logs}/catalina.out <<EOF
+Please login to the host to view the logs:
+
+   sudo journalctl -u tomcat8
+EOF
+
 # node-export
 %{__install} -d -m 0775 %{buildroot}%{hoot_home}/node-export-server
 %{__cp} -p node-export-server/*.{js,json} %{buildroot}%{hoot_home}/node-export-server
@@ -338,13 +347,13 @@ This package contains the UI and web services.
 
 %files services-ui
 %{_unitdir}/node-export.service
-%%if 0%{with_node_mapnik} == 1
+%if 0%{with_node_mapnik} == 1
 %{_unitdir}/node-mapnik.service
 %endif
 
 %defattr(-, root, tomcat, 0775)
 %{hoot_home}/node-export-server
-%%if 0%{with_node_mapnik} == 1
+%if 0%{with_node_mapnik} == 1
 %{hoot_home}/node-mapnik-server
 %endif
 %{hoot_home}/test-files
@@ -357,6 +366,7 @@ This package contains the UI and web services.
 %{hoot_home}/tmp
 %{hoot_home}/userfiles
 %{tomcat_home}/.deegree
+%{tomcat_logs}/catalina.out
 
 #the order of operations during an upgrade is:
 #
@@ -382,7 +392,7 @@ fi
 %preun
 
 %systemd_preun node-export.service
-%%if 0%{with_node_mapnik} == 1
+%if 0%{with_node_mapnik} == 1
 %systemd_preun node-mapnik.service
 %endif
 
@@ -391,7 +401,7 @@ fi
 if test -f /.dockerenv; then exit 0; fi
 
 %systemd_post node-export.service
-%%if 0%{with_node_mapnik} == 1
+%if 0%{with_node_mapnik} == 1
 %systemd_post node-mapnik.service
 %endif
 
@@ -553,7 +563,9 @@ EOT
     rm -f /tmp/osmapidb.log
 
     systemctl start node-export.service
+%if 0%{with_node_mapnik} == 1
     systemctl start node-mapnik.service
+%endif
 
     updateConfigFiles
     updateLiquibase
@@ -582,7 +594,9 @@ fi
 if test -f /.dockerenv; then exit 0; fi
 
 %systemd_postun node-export.service
+%if 0%{with_node_mapnik} == 1
 %systemd_postun node-mapnik.service
+%endif
 
 if [ "$1" = "0" ]; then
     # Perform tasks to clean up after uninstallation
@@ -643,8 +657,10 @@ systemctl enable postgresql-%{pg_version}
 systemctl enable tomcat8
 # set NodeJS node-export-server to autostart
 systemctl enable node-export
+%if 0%{with_node_mapnik} == 1
 # set NodeJS node-mapnik-server to autostart
 systemctl enable node-mapnik
+%endif
 
 
 %postun autostart
@@ -655,10 +671,12 @@ if test -f /.dockerenv; then exit 0; fi
 systemctl disable postgresql-%{pg_version}
 # set Tomcat to NOT autostart
 systemctl disable tomcat8
-# set NodeJS node-mapnik-server to NOT autostart
-systemctl disable node-export
 # set NodeJS node-export-server to NOT autostart
+systemctl disable node-export
+%if 0%{with_node_mapnik} == 1
+# set NodeJS node-mapnik-server to NOT autostart
 systemctl disable node-mapnik
+%endif
 
 
 %package services-devel-deps
