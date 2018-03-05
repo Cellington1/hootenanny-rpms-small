@@ -60,7 +60,7 @@ gpg --verify vagrant_${VAGRANT_VERSION}_SHA256SUMS.sig
 
 # Verify checksums, but grep out all other lines in the checksum
 # file except the 64-bit RPM.
-sha256sum -c <(grep -e 'x86_64.rpm\>' vagrant_2.0.2_SHA256SUMS)
+sha256sum -c <(grep -e 'x86_64.rpm\>' vagrant_${VAGRANT_VERSION}_SHA256SUMS)
 
 # Finally install Vagrant.
 sudo yum install -y vagrant_${VAGRANT_VERSION}_x86_64.rpm
