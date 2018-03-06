@@ -28,7 +28,7 @@ ENV RPMBUILD_USER=jenkins-slave
 ENV RPMBUILD_HOME=/rpmbuild
 
 # Create unprivileged user for building RPMs, and setup basic macros.
-RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 jenkins-slave && \
+RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuilde && \
     echo "%_hardened_build 1" >> /rpmbuild/.rpmmacros && \
     echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /rpmbuild/.rpmmacros && \
     echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
