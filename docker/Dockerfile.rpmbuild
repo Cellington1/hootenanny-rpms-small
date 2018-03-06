@@ -34,5 +34,5 @@ RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 jenkins-slave && \
     echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
     echo "%debug_package %{nil}" >> /rpmbuild/.rpmmacros && \
     echo "%dist .el7" >> /rpmbuild/.rpmmacros && \
-    chmod 0755 /rpmbuild && \
-    chown -R jenkins-slave:jenkins-slave /rpmbuild/
+    chmod -R 1000 /rpmbuild && \
+    chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
