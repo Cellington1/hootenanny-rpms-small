@@ -36,3 +36,5 @@ RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild  && \
     echo "%dist .el7" >> /rpmbuild/.rpmmacros && \
     chmod -R 1000 /rpmbuild && \
     chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
+
+RUN ls -la / && RUN ls -la /rpmbuid
