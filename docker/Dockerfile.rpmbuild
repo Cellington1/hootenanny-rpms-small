@@ -37,4 +37,4 @@ RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild  && \
     chmod -R 1000 /rpmbuild && \
     chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
 
-RUN ls -la /  RUN ls -la /rpmbuild
+RUN ls -la / && ls -la /rpmbuild
