@@ -240,7 +240,7 @@ function run_dep_image() {
 # Runs a hootenanny build image.
 function run_hoot_build_image() {
     local OPTIND opt
-    local entrypoint=docker-entrypoint.sh
+    local entrypoint=/docker-entrypoint.sh
     local image=hootenanny/rpmbuild-hoot-release
     local sources_mode=ro
     local user=rpmbuild

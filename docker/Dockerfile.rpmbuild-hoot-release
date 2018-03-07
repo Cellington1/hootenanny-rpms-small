@@ -43,6 +43,8 @@ RUN /tmp/postgresql-install.sh && \
 # Copy in the entrypoint.
 COPY scripts/build-entrypoint.sh /docker-entrypoint.sh
 
+RUN chmod 775 /docker-entrypoint.sh
+
 RUN ls -ls /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
