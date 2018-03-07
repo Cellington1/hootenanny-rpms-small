@@ -272,13 +272,13 @@ function run_hoot_build_image() {
     else
         mkdir -p $SCRIPT_HOME/hootenanny $CACHE/m2 $CACHE/npm
         docker run \
-               -v $SOURCES:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/SOURCES:$sources_mode \
-               -v $SPECS:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/SPECS:ro \
-               -v $RPMS:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/RPMS:rw \
-               -v $SCRIPT_HOME/hootenanny:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/hootenanny:rw \
-               -v $CACHE/m2:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/.m2:rw \
-               -v $CACHE/npm:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/.npm:rw \
-               -v $SCRIPT_HOME/scripts:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/scripts:ro \
+               -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
+               -v $SPECS:/rpmbuild/SPECS:ro \
+               -v $RPMS:/jrpmbuild/RPMS:rw \
+               -v $SCRIPT_HOME/hootenanny:/rpmbuild/hootenanny:rw \
+               -v $CACHE/m2:/rpmbuild/.m2:rw \
+               -v $CACHE/npm:/rpmbuild/.npm:rw \
+               -v $SCRIPT_HOME/scripts:/rpmbuild/scripts:ro \
                --entrypoint $entrypoint \
                -u $user \
                -i --rm \
