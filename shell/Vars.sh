@@ -274,7 +274,7 @@ function run_hoot_build_image() {
         docker run \
                -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
                -v $SPECS:/rpmbuild/SPECS:ro \
-               -v $RPMS:/jrpmbuild/RPMS:rw \
+               -v $RPMS:/rpmbuild/RPMS:rw \
                -v $SCRIPT_HOME/hootenanny:/rpmbuild/hootenanny:rw \
                -v $CACHE/m2:/rpmbuild/.m2:rw \
                -v $CACHE/npm:/rpmbuild/.npm:rw \
