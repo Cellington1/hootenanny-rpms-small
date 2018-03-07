@@ -34,7 +34,7 @@ RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild  && \
     echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
     echo "%debug_package %{nil}" >> /rpmbuild/.rpmmacros && \
     echo "%dist .el7" >> /rpmbuild/.rpmmacros && \
-    chmod -R 1000 /rpmbuild && \
+    chmod -R 777 /rpmbuild && \
     chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
 
 RUN ls -la / && ls -la /rpmbuild
