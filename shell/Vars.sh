@@ -281,7 +281,7 @@ function run_hoot_build_image() {
                -v $SCRIPT_HOME/scripts:/rpmbuild/scripts:ro \
                --entrypoint $entrypoint \
                -u $user \
-               -i --rm \
+	       -i --rm \
                $image "${@:-/bin/bash}"
     fi
 }

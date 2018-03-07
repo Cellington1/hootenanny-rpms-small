@@ -14,4 +14,4 @@ echo "pea soup"
 
 run_hoot_build_image \
     -i $BUILD_IMAGE -s rw \
-    /bin/bash -c "/rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /rpmbuild/scripts/hoot-archive.sh"
+    /bin/sh -c "/rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /rpmbuild/scripts/hoot-archive.sh"
