@@ -31,7 +31,7 @@ function latest_hoot_archive() {
     echo $(ls -1t $SOURCES/hootenanny-[0-9]*.tar.gz | head -n1)
 }
 
-latest_hoot_archive
+#latest_hoot_archive
 
 # Returns the output of Hootenanny's `HOOT_VERSION_GEN`, embedded
 # in the archive's filename.
