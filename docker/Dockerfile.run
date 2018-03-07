@@ -41,3 +41,6 @@ COPY scripts/runtime-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
 WORKDIR ${HOOT_HOME}
+
+RUN echo $HOOT_HOME
+RUN ls -la
