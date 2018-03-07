@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 GIT_COMMIT="${1:-develop}"
 HOOT_DEST=${HOOT_DEST:-$HOME/hootenanny}
 HOOT_REPO=${HOOT_REPO:-https://github.com/ngageoint/hootenanny.git}

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 HOOT_REPO="${HOOT_REPO:-${HOME}/hootenanny}"
 
 if [ ! -d $HOOT_REPO/.git ]; then
