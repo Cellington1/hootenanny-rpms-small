@@ -228,9 +228,9 @@ function run_dep_image() {
     else
         mkdir -p $RPMS
         docker run \
-               -v $SOURCES:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/SOURCES:$sources_mode \
-               -v $SPECS:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/SPECS:ro \
-               -v $RPMS:/jslave/workspace/VGI/hootenanny/hoot/rpmbuild/RPMS:rw \
+               -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
+               -v $SPECS:/rpmbuild/SPECS:ro \
+               -v $RPMS:/rpmbuild/RPMS:rw \
                -u $user \
                -i --rm \
                $image "$@"
