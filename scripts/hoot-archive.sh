@@ -10,6 +10,7 @@ fi
 pushd $HOOT_REPO
 cp LocalConfig.pri.orig LocalConfig.pri
 
+
 # TODO: Do we add `ccache` like in original `BuildArchive.sh`?
 #echo "QMAKE_CXX=ccache g++" >> LocalConfig.pri
 
