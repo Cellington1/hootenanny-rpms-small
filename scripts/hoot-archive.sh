@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euxo pipefail
-HOOT_REPO="${HOOT_REPO:-${HOME}/hootenanny}"
+HOOT_REPO="${HOOT_REPO:-/rpmbuild/hootenanny}"
 
 if [ ! -d $HOOT_REPO/.git ]; then
     echo 'Please checkout Hootenanny repository first.'
