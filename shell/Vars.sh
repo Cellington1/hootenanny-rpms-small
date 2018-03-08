@@ -243,7 +243,7 @@ function run_hoot_build_image() {
     local entrypoint=/docker-entrypoint.sh
     local image=hootenanny/rpmbuild-hoot-release
     local sources_mode=ro
-    local user=rpmbuild
+    local user=root
     local usage=no
 
     while getopts ":e:i:s:u:" opt; do
