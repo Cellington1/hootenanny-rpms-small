@@ -14,4 +14,4 @@ echo "pea soup"
 
 run_hoot_build_image \
     -i $BUILD_IMAGE -s rw \
-    /bin/sh -c "/rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /rpmbuild/scripts/hoot-archive.sh"
+    /bin/sh -c "su-exec postgres pg_ctl -D $PGDATA -s start &> /dev/null && /rpmbuild/scripts/hoot-checkout.sh ${GIT_COMMIT} && /rpmbuild/scripts/hoot-archive.sh"
