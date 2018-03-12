@@ -42,4 +42,5 @@ make -j$(nproc) archive
 
 # Copy in source archive to RPM sources.
 cp -v hootenanny-[0-9]*.tar.gz /rpmbuild/SOURCES
+ls -la /rpmbuild/SOURCES
 popd
