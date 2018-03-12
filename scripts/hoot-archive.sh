@@ -38,7 +38,7 @@ make -j$(nproc) clean
 make -j$(nproc) archive
 
 # Move the second maven run here, to see if we can get past the cache issue
-make -J$(nproc) archive
+make -j$(nproc) archive
 
 # Copy in source archive to RPM sources.
 cp -v hootenanny-[0-9]*.tar.gz $HOME/SOURCES
