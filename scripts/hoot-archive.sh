@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set +euxo pipefail
 HOOT_REPO="${HOOT_REPO:-$HOME/hootenanny}"
 
 if [ ! -d $HOOT_REPO/.git ]; then
@@ -36,6 +36,9 @@ automake --add-missing --copy
 # Make the archive.
 make -j$(nproc) clean
 make -j$(nproc) archive
+
+# Move the second maven run here, to see if we can get past the cache issue
+make -J$(nproc) archive
 
 # Copy in source archive to RPM sources.
 cp -v hootenanny-[0-9]*.tar.gz $HOME/SOURCES
