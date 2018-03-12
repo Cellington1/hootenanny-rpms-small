@@ -41,6 +41,9 @@ function latest_hoot_version_gen() {
     echo ${hoot_version_gen%%.tar.gz}
 }
 
+# Test function
+latest_hoot_version_gen
+
 # Get version from YAML file.
 function config_version() {
     cat $SCRIPT_HOME/config.yml | grep "\\&${1}" | awk '{ print $3 }' | tr -d "'" | awk -F- '{ print $1 }'
