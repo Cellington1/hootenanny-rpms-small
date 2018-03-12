@@ -1,6 +1,6 @@
 #!/bin/bash
 set +euxo pipefail
-HOOT_REPO="${HOOT_REPO:-/rpmbuild/hootenanny}"
+HOOT_REPO="${HOOT_REPO:-$HOME/hootenanny}"
 
 if [ ! -d $HOOT_REPO/.git ]; then
     echo 'Please checkout Hootenanny repository first.'
@@ -41,6 +41,6 @@ make -j$(nproc) archive
 make -j$(nproc) archive
 
 # Copy in source archive to RPM sources.
-cp -v hootenanny-[0-9]*.tar.gz /rpmbuild/SOURCES
+cp -v hootenanny-[0-9]*.tar.gz $HOME/SOURCES
 ls -la /rpmbuild/SOURCES
 popd
