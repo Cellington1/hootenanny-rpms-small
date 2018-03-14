@@ -41,6 +41,8 @@ make -j$(nproc) archive
 make -j$(nproc) archive
 
 # Copy in source archive to RPM sources.
+
+find / -name SOURCES
 cp -v hootenanny-[0-9]*.tar.gz $HOME/SOURCES/
 ls -la
 pwd
