@@ -45,8 +45,8 @@ make -j$(nproc) archive
 echo "Current location"
 pwd
 
-cp -v hootenanny-[0-9]*.tar.gz $HOME/SOURCES/ && cp -v hootenanny-[0-9]*.tar.gz /rpmbuild/SOURCES 
+cp -v hootenanny-[0-9]*.tar.gz /rpmbuild/SOURCES 
 ls -la
 pwd
-ls -la /root/SOURCES
+ls -la /root/SOURCES && ls -la /root && ls -la /rpmbuild
 popd
