@@ -40,7 +40,7 @@ function latest_hoot_version_gen() {
     local hoot_version_gen=${hoot_archive##$SOURCES/hootenanny-}
     echo ${hoot_version_gen%%.tar.gz}
 }
-j
+
 
 # Test function
 latest_hoot_version_gen
