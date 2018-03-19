@@ -283,7 +283,8 @@ function run_hoot_build_image() {
                -v $CACHE/m2:/rpmbuild/.m2:rw \
                -v $CACHE/npm:/rpmbuild/.npm:rw \
                -v $SCRIPT_HOME/scripts:/rpmbuild/scripts:ro \
-               -u $user \
+               --entrypoint $entrypoint \
+	       -u $user \
 	       -i --rm \
                $image "${@:-/bin/bash}"
     fi
