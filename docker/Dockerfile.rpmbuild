@@ -23,16 +23,17 @@ ENV LANG ${lang}
 ENV LC_ALL ${locale}
 
 # Put some key arguments in environment to allow access in child containers.
-ENV RPMBUILD_DIST=${rpmbuild_dist}
-ENV RPMBUILD_USER=${rpmbuild_user}
-ENV RPMBUILD_HOME=${rpmbuild_home}
+ENV RPMBUILD_DIST=.el7
+ENV RPMBUILD_USER=rpmbuild
+ENV RPMBUILD_HOME=/rpmbuild
 
 # Create unprivileged user for building RPMs, and setup basic macros.
-RUN useradd -d ${rpmbuild_home} -m -s /bin/bash -u ${rpmbuild_uid} ${rpmbuild_user} && \
-    echo "%_hardened_build ${hardened_build}" >> ${rpmbuild_home}/.rpmmacros && \
-    echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> ${rpmbuild_home}/.rpmmacros && \
-    echo "%_topdir ${rpmbuild_home}" >> ${rpmbuild_home}/.rpmmacros && \
-    echo "%debug_package %{nil}" >> ${rpmbuild_home}/.rpmmacros && \
-    echo "%dist ${rpmbuild_dist}" >> ${rpmbuild_home}/.rpmmacros && \
-    chmod 0755 ${rpmbuild_home} && \
-    chown ${rpmbuild_user}:${rpmbuild_user} ${rpmbuild_home}/.rpmmacros
+RUN useradd -d /rpmbuild -m -s /bin/bash -u 1000 rpmbuild && \
+    echo "%_hardened_build 1" >> /rpmbuild/.rpmmacros && \
+    echo "%_smp_mflags -j%(nproc) -l%(expr %(nproc) + 2)" >> /rpmbuild/.rpmmacros && \
+    echo "%_topdir /rpmbuild" >> /rpmbuild/.rpmmacros && \
+    echo "%debug_package %{nil}" >> /rpmbuild/.rpmmacros && \
+    echo "%dist .el7" >> /rpmbuild/.rpmmacros && \
+    chmod 0755 /rpmbuild && \
+    chown rpmbuild:rpmbuild /rpmbuild/.rpmmacros
+
