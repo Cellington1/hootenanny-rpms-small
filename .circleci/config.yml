@@ -2,6 +2,7 @@
 version: 2
 
 jobs:
+  resource_class: 'large'
   lint:
     working_directory: '/rpmbuild/hootenanny-rpms'
     docker:
@@ -14,8 +15,9 @@ jobs:
           command: |
             ./tests/lint-yaml.sh
             ./tests/lint-bash.sh
-  rpmbuild-hoot-release:
+  rpmbuild-pgdg:
     machine:
+      docker_layer_caching: true
       enabled: true
     steps:
       - checkout
@@ -33,9 +35,47 @@ jobs:
           command: |
             MAVEN_CACHE=0 vagrant validate
       - run:
-          name: 'make rpmbuild-hoot-release'
+          name: 'make rpmbuild-pgdg'
           command: |
             export RPMBUILD_UID_MATCH=1
+            make rpmbuild-pgdg
+  rpmbuild-hoot-devel:
+    machine:
+      docker_layer_caching: true
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: 'Install RPM Tools'
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y rpm
+      - run:
+          name: 'Install Vagrant'
+          command: |
+            ./scripts/vagrant-install.sh
+      - run:
+          name: 'make rpmbuild-hoot-devel'
+          command: |
+            make rpmbuild-hoot-devel
+  rpmbuild-hoot-release:
+    machine:
+      docker_layer_caching: true
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: 'Install RPM Tools'
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y rpm
+      - run:
+          name: 'Install Vagrant'
+          command: |
+            ./scripts/vagrant-install.sh
+      - run:
+          name: 'make rpmbuild-hoot-release'
+          command: |
             make rpmbuild-hoot-release
 
 workflows:
@@ -43,6 +83,12 @@ workflows:
   tests:
     jobs:
       - lint
-      - rpmbuild-hoot-release:
+      - rpmbuild-pgdg:
           requires:
             - lint
+      - rpmbuild-hoot-devel:
+          requires:
+            - rpmbuild-pgdg
+      - rpmbuild-hoot-release:
+          requires:
+            - rpmbuild-pgdg
