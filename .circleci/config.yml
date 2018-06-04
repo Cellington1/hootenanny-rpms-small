@@ -14,9 +14,27 @@ jobs:
           command: |
             ./tests/lint-yaml.sh
             ./tests/lint-bash.sh
-  rpmbuild-pgdg:
+  rpmbuild-hoot-devel:
     machine:
-      docker_layer_caching: true
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: 'Install RPM Tools'
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y rpm
+      - run:
+          name: 'Install Vagrant'
+          command: |
+            ./scripts/vagrant-install.sh
+      - run:
+          name: 'make rpmbuild-hoot-devel'
+          command: |
+            export RPMBUILD_UID_MATCH=1
+            make rpmbuild-hoot-devel
+  rpmbuild-hoot-release:
+    machine:
       enabled: true
     steps:
       - checkout
@@ -34,47 +52,9 @@ jobs:
           command: |
             MAVEN_CACHE=0 vagrant validate
       - run:
-          name: 'make rpmbuild-pgdg'
-          command: |
-            export RPMBUILD_UID_MATCH=1
-            make rpmbuild-pgdg
-  rpmbuild-hoot-devel:
-    machine:
-      docker_layer_caching: true
-      enabled: true
-    steps:
-      - checkout
-      - run:
-          name: 'Install RPM Tools'
-          command: |
-            sudo apt-get update -qq
-            sudo apt-get install -qq -y rpm
-      - run:
-          name: 'Install Vagrant'
-          command: |
-            ./scripts/vagrant-install.sh
-      - run:
-          name: 'make rpmbuild-hoot-devel'
-          command: |
-            make rpmbuild-hoot-devel
-  rpmbuild-hoot-release:
-    machine:
-      docker_layer_caching: true
-      enabled: true
-    steps:
-      - checkout
-      - run:
-          name: 'Install RPM Tools'
-          command: |
-            sudo apt-get update -qq
-            sudo apt-get install -qq -y rpm
-      - run:
-          name: 'Install Vagrant'
-          command: |
-            ./scripts/vagrant-install.sh
-      - run:
           name: 'make rpmbuild-hoot-release'
           command: |
+            export RPMBUILD_UID_MATCH=1
             make rpmbuild-hoot-release
 
 workflows:
@@ -82,12 +62,9 @@ workflows:
   tests:
     jobs:
       - lint
-      - rpmbuild-pgdg:
-          requires:
-            - lint
       - rpmbuild-hoot-devel:
           requires:
-            - rpmbuild-pgdg
+            - lint
       - rpmbuild-hoot-release:
           requires:
-            - rpmbuild-pgdg
+            - lint
