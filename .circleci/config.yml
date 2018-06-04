@@ -38,6 +38,44 @@ jobs:
           command: |
             export RPMBUILD_UID_MATCH=1
             make rpmbuild-pgdg
+  rpmbuild-hoot-devel:
+    machine:
+      docker_layer_caching: true
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: 'Install RPM Tools'
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y rpm
+      - run:
+          name: 'Install Vagrant'
+          command: |
+            ./scripts/vagrant-install.sh
+      - run:
+          name: 'make rpmbuild-hoot-devel'
+          command: |
+            make rpmbuild-hoot-devel
+  rpmbuild-hoot-release:
+    machine:
+      docker_layer_caching: true
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: 'Install RPM Tools'
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y rpm
+      - run:
+          name: 'Install Vagrant'
+          command: |
+            ./scripts/vagrant-install.sh
+      - run:
+          name: 'make rpmbuild-hoot-release'
+          command: |
+            make rpmbuild-hoot-release
 
 workflows:
   version: 2
@@ -47,3 +85,9 @@ workflows:
       - rpmbuild-pgdg:
           requires:
             - lint
+      - rpmbuild-hoot-devel:
+          requires:
+            - rpmbuild-pgdg
+      - rpmbuild-hoot-release:
+          requires:
+            - rpmbuild-pgdg
