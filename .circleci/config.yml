@@ -2,7 +2,7 @@
 version: 2
 
 jobs:
-  resource_class: 'large'
+  resource_class: large
   lint:
     working_directory: '/rpmbuild/hootenanny-rpms'
     docker:
