@@ -22,7 +22,7 @@ jobs:
       - run:
           name: 'Install RPM Tools'
           command: |
-            sudo aptre-get update -qq
+            sudo apt-get update -qq
             sudo apt-get install -qq -y rpm
       - run:
           name: 'Install Vagrant'
