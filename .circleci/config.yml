@@ -2,7 +2,6 @@
 version: 2
 
 jobs:
-  resource_class: large
   lint:
     working_directory: '/rpmbuild/hootenanny-rpms'
     docker:
@@ -17,14 +16,13 @@ jobs:
             ./tests/lint-bash.sh
   rpmbuild-pgdg:
     machine:
-      docker_layer_caching: true
       enabled: true
     steps:
       - checkout
       - run:
           name: 'Install RPM Tools'
           command: |
-            sudo apt-get update -qq
+            sudo aptre-get update -qq
             sudo apt-get install -qq -y rpm
       - run:
           name: 'Install Vagrant'
