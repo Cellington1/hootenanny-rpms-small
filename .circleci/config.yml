@@ -16,6 +16,7 @@ jobs:
             ./tests/lint-bash.sh
   rpmbuild-pgdg:
     machine:
+      docker_layer_caching: true
       enabled: true
     steps:
       - checkout
