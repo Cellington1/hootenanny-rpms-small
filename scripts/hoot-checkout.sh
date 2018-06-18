@@ -2,7 +2,7 @@
 set -euo pipefail
 GIT_COMMIT="${1:-develop}"
 HOOT_DEST=${HOOT_DEST:-$HOME/hootenanny}
-HOOT_REPO=${HOOT_REPO:-https://github.com/Cellington1/hootenanny-rpms-small.git}
+HOOT_REPO=${HOOT_REPO:-https://github.com/ngageoint/hootenanny.git}
 
 if [ ! -d $HOOT_DEST/.git ]; then
     git clone $HOOT_REPO $HOOT_DEST
