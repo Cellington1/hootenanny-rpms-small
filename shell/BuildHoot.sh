@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euox pipefail
 
 ## Get variables.
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/Vars.sh
