@@ -287,7 +287,7 @@ function run_repo_image() {
 function run_hoot_build_image() {
     local OPTIND opt
     local entrypoint=/docker-entrypoint.sh
-    local image=hootenanny/rpmbuild-hoot-release
+    local image=cellington1/rpmbuild-hoot-release
     local sources_mode=ro
     local user=root
     local usage=no
@@ -328,7 +328,7 @@ function run_hoot_build_image() {
                -v $SCRIPT_HOME/scripts:/rpmbuild/scripts:ro \
                --entrypoint $entrypoint \
                -u $user \
-               -it --rm \
+               -i --rm \
                $image "${@:-/bin/bash}"
     fi
 }
