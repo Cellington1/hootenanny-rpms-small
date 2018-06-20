@@ -7,7 +7,7 @@ if ! test -x /usr/bin/rpmbuild; then
 fi
 
 ## Important variables needed for functions.
-SCRIPT_HOME=$"/rpmbuild"
+SCRIPT_HOME=$"/jslave/workspace/VGI/hoot240/"
 
 
 #SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
