@@ -320,7 +320,7 @@ function run_hoot_build_image() {
         echo "run_hoot_build_image: [-e <entrypoint>] [-i <image>] [-u <user>]"
     else
         mkdir -p $SCRIPT_HOME/hootenanny $RPMS $CACHE/m2 $CACHE/npm
-        maven_cache
+        
         docker run \
                -v $SOURCES:/rpmbuild/SOURCES:$sources_mode \
                -v $SPECS:/rpmbuild/SPECS:ro \
