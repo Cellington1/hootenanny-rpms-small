@@ -7,7 +7,9 @@ if ! test -x /usr/bin/rpmbuild; then
 fi
 
 ## Important variables needed for functions.
-SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+SCRIPT_HOME="$WORKSPACE"
+
+#SCRIPT_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 # Directories used in RPM process.
 SPECS=$SCRIPT_HOME/SPECS
