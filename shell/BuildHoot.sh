@@ -4,7 +4,7 @@ set -euox pipefail
 ## Get variables.
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/Vars.sh
 
-BUILD_IMAGE=${BUILD_IMAGE:-cellington1/rpmbuild-hoot-release}
+BUILD_IMAGE=${BUILD_IMAGE:-hootenanny/rpmbuild-hoot-release}
 
 set +u
 if [ -z $1 ]; then
